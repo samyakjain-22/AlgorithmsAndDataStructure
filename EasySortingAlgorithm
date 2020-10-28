@@ -1,0 +1,53 @@
+# ------------------------SELECTION SORT-------------------------------
+l=[5,1,3,4,5,34,2,12,1,4,3,2,1]
+def selection_sort(seq):
+    for i in range(len(seq)):
+        min_index=i
+        for j in range(i,len(seq)):
+            if seq[min_index]>seq[j]:
+                min_index=j
+        seq[min_index],seq[i]=seq[i],seq[min_index]
+        return seq
+print(selection_sort(l))
+# -----------------------------QUICK SORT-------------------------------
+# ---------------------With Middle Element As Pivot---------------------
+def quicksort(array):
+    if len(array) < 2:
+        return array
+    else:
+         pivot=array[len(array)//2]
+         array[0],pivot=pivot,array[0]
+         less=[i for i in array[1:] if i <= pivot]
+         greater = [i for i in array[1:] if i > pivot]
+         return quicksort(less) + [pivot] + quicksort(greater)
+
+print(quicksort([6,5,4,3,2,1]))
+# -----------------------------MERGE SORT-------------------------------
+def merge(a,b):
+    (m,n) = (len(a),len(b))
+    (c,i,j) = ([],0,0)
+    while i+j<m+n:
+        if i==m:
+            c.append(b[j])
+            j=j+1
+        elif j==n:
+            c.append(a[i])
+            i=i+1
+        elif a[i]>=b[j]:
+            c.append(b[j])
+            j+=1
+        elif b[j]>a[i]:
+            c.append(a[i])
+            i+=1
+    return c
+
+def merge_sort(l):
+    if len(l)<= 1:
+        return (l)
+    mid=int(len(l)//2)
+    a=merge_sort(l[:mid])
+    b=merge_sort(l[mid:])
+    return merge(a,b)
+
+l1=[4,3,2,1]
+print(merge_sort(l1))
